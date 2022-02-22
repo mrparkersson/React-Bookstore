@@ -1,5 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import Book from './Book';
 
 const BookList = () => {
   const ListOfBooks = [
@@ -34,10 +35,12 @@ const BookList = () => {
                 <li>{book.title}</li>
                 <li>{book.author}</li>
               </ul>
+              <button>delete</button>
             </div>
           );
         })}
       </div>
+      <Book />
     </div>
   );
 };
