@@ -1,12 +1,9 @@
-import Book from './components/Book';
-import BookList from './components/BookList';
-import Nav from './components/Nav';
+import React from 'react';
 
 function App() {
   return (
     <div>
-      <Nav />
-      <BookList />
+      <h1>Hello React and Redux</h1>
       <Book />
     </div>
   );
