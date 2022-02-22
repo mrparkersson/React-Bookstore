@@ -1,46 +1,59 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import Book from './Book';
+import { useDispatch, useSelector } from 'react-redux';
+import { bookActions } from '../redux/bookslice';
 
 const BookList = () => {
-  const ListOfBooks = [
-    {
-      id: uuidv4(),
-      genre: 'Action',
-      title: 'The Hunger Games',
-      author: 'Suzanne Collins',
-    },
+  const dispatch = useDispatch();
+  const booklist = useSelector((state) => state.book.items);
 
-    {
-      id: uuidv4(),
-      genre: 'Science Fiction ',
-      title: 'Dune',
-      author: 'Frank Herbert',
-    },
-    {
-      id: uuidv4(),
-      genre: 'Economy',
-      title: 'Capital in the Twenty-First Century',
-      author: 'Suzanne Collins',
-    },
-  ];
+  const deleteBook = (e) => {
+    const targetId = e.target.id;
+    dispatch(bookActions.removeBookItem(targetId));
+  };
+
+  const addBook = (e) => {
+    e.preventDefault();
+    const { title, category } = e.target.elements;
+    dispatch(
+      bookActions.addBookItem({
+        title: title.value,
+        category: category.value,
+      })
+    );
+  };
+
   return (
     <div className='book-list-container'>
       <div className='list'>
-        {ListOfBooks.map((book) => {
-          return (
-            <div className='book-list'>
-              <ul key={book.id}>
-                <li>{book.genre}</li>
-                <li>{book.title}</li>
-                <li>{book.author}</li>
-              </ul>
-              <button>delete</button>
-            </div>
-          );
-        })}
+        <form onSubmit={addBook}>
+          {booklist.map((book) => {
+            return (
+              <div className='book-list' key={book.id}>
+                <div className='populated-list'>
+                  <ul key={book.id}>
+                    <li>{book.category}</li>
+                    <li>{book.title}</li>
+                  </ul>
+                  <button onClick={deleteBook} id={book.id}>
+                    delete
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+          <h3>Add New Book</h3>
+
+          <input type='text' placeholder='Book title' name='title' required />
+          <input type='text' placeholder='category' name='category' required />
+          <button type='submit'>add</button>
+          <select name='selectList' id='selectList' defaultValue='Categories'>
+            <option value='option 1'>Category</option>
+            <option value='option 2'>Action</option>
+            <option value='option 2'>Science Fiction</option>
+            <option value='option 2'>Economy</option>
+          </select>
+        </form>
       </div>
-      <Book />
     </div>
   );
 };

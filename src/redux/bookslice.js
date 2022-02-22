@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 const bookSlice = createSlice({
   name: 'book',
@@ -9,28 +10,27 @@ const bookSlice = createSlice({
   reducers: {
     addBookItem(state, action) {
       const newBook = action.payload;
-      const existingBook = state.items.find((book) => book.id === newBook.id);
+      const existingBook = state.items.find(
+        (book) => book.title === newBook.title
+      );
       if (!existingBook) {
         state.items.push({
-          id: newBook.id,
+          id: uuidv4(),
           title: newBook.title,
           genre: newBook.genre,
-          author: newBook.author,
+          category: newBook.category,
         });
+
+        return state;
       } else {
-        return;
+        return state;
       }
     },
 
     removeBookItem(state, action) {
       const id = action.payload;
-      let existemBookItem = state.items.find((book) => book.id === id);
-      if (existemBookItem === 1) {
-        state.items.filter((book) => book.id !== id);
-      } else {
-        return;
-      }
-      existemBookItem--;
+      state.items = state.items.filter((item) => item.id !== id);
+      return state;
     },
   },
 });
