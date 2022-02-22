@@ -7,7 +7,6 @@
     "csstree/validator": true
   },
   "ignoreFiles": [
-    "coverage/**",
     "build/**",
     "dist/**",
     "**/reset*.css",
