@@ -1,31 +1,34 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { bookActions } from '../redux/bookslice';
+import { addBook } from '../redux/apislice';
+import { removeBook } from '../redux/removebook';
 
 const BookList = () => {
   const dispatch = useDispatch();
   const booklist = useSelector((state) => state.book.items);
-
   const deleteBook = (e) => {
     const targetId = e.target.id;
-    dispatch(bookActions.removeBookItem(targetId));
+    dispatch(removeBook(targetId));
   };
 
-  const addBook = (e) => {
+  const addBookHandler = (e) => {
     e.preventDefault();
     const { title, category } = e.target.elements;
     dispatch(
-      bookActions.addBookItem({
+      addBook({
         title: title.value,
         category: category.value,
       })
     );
+
+    title.value = '';
+    category.value = '';
   };
 
   return (
     <div className='book-list-container'>
       <div className='list'>
-        <form onSubmit={addBook}>
+        <form onSubmit={addBookHandler}>
           {booklist.map((book) => {
             return (
               <div className='book-list' key={book.id}>
