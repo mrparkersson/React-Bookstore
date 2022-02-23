@@ -1,4 +1,5 @@
 import Categories from './components/Categories';
+import './index.css';
 
 import BookList from './components/BookList';
 import Nav from './components/Nav';
@@ -7,7 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 function App() {
   return (
     <Router>
-      <div>
+      <div className='App'>
         <Nav />
         <Switch>
           <Route path='/books' component={BookList} />
