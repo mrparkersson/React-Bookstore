@@ -3,6 +3,7 @@
 * {
   box-sizing: border-box;
 }
+
 :root {
   --bubble-gum-pink: #ff5ab7;
   --black: #1e1e1e;
@@ -29,15 +30,13 @@
   border-width: 5px;
   border-radius: 100px;
   color: rgb(0, 208, 255);
-  /* border-image-source: linear-gradient(to bottom, #307bbe, #379cf6); */
   border-image-slice: 1;
 }
 
 .-Percent-Complete {
   width: 4.25rem;
   height: 2.438rem;
-  margin: 0.063rem 5.75rem 0 0.688rem;
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
   font-size: 2rem;
   font-weight: normal;
   font-stretch: normal;
@@ -49,7 +48,7 @@
 
 .Completed {
   opacity: 0.5;
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
   font-size: 0.875rem;
   font-weight: normal;
   font-stretch: normal;
@@ -65,6 +64,10 @@
   padding: 1.438rem 6.188rem 1.688rem 6.25rem;
   background-color: #fff;
   width: 100%;
+}
+
+.author-info ul li {
+  list-style: none;
 }
 
 .navigation {
@@ -137,10 +140,6 @@
   border: none;
   color: #4386bf;
   background-color: #fff;
-}
-
-.author-info ul li {
-  list-style: none;
 }
 
 .author-info ul li:first-child {
@@ -274,7 +273,6 @@ form {
 }
 
 #book {
-  width: 10.5rem;
   height: 2.813rem;
   margin: 1.188rem 2.125rem 0 0;
   padding: 0.813rem 0.688rem 0.813rem 1.063rem;
