@@ -9,16 +9,18 @@ const Nav = () => {
       <div className='navigation'>
         <h1>BookStore CMS</h1>
         <ul>
-          <Link to='/'>
-            <li>Books</li>
+          <Link to='/' id='big-link'>
+            <li id='books'>Books</li>
           </Link>
-          <Link to='/categories'>
+          <Link to='/categories' id='big-link'>
             <li>Categories</li>
           </Link>
         </ul>
       </div>
-      <div className='avatar-container'>
-        <FontAwesomeIcon icon={faUser} color='blue' />
+      <div className='Oval'>
+        <div className='avatar-container'>
+          <FontAwesomeIcon icon={faUser} color='#0290ff' />
+        </div>
       </div>
     </div>
   );

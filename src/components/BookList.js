@@ -13,11 +13,6 @@ const BookList = () => {
     selectedValue: 'none',
     selectedText: '',
   });
-  const [category, setCategory] = useState({
-    inputCategory: '',
-    selectedValue: 'none',
-    selectedText: '',
-  });
 
   const handleTitleChange = (e) => {
     setForm({
@@ -26,10 +21,12 @@ const BookList = () => {
     });
   };
 
-  const categoryChangeHandler = (e) => {
-    setCategory({
-      ...category,
-      inputCategory: e.target.value,
+  const handleSelectChange = (e) => {
+    const index = e.target.selectedIndex;
+    setForm({
+      ...form,
+      selectedValue: e.target.value,
+      selectedText: e.target[index].innerHTML,
     });
   };
 
@@ -42,7 +39,7 @@ const BookList = () => {
     const newBook = {
       item_id: uuidv4(),
       title: form.inputTitle,
-      category: category.inputCategory,
+      category: form.selectedText,
     };
     dispatch(postBook(newBook));
   };
@@ -52,18 +49,40 @@ const BookList = () => {
       <div className='list'>
         {booksArray.map((books, index) => {
           return (
-            <div className='book-list' key={Object.keys(booksState)[index]}>
+            <div className='Lesson-Panel' key={Object.keys(booksState)[index]}>
               <div className='populated-list'>
-                <ul key={Object.keys(booksState)[index]}>
-                  <li>{books[0].category}</li>
-                  <li>{books[0].title}</li>
-                </ul>
-                <button
-                  onClick={(e) => remove(e.target.id)}
-                  id={Object.keys(booksState)[index]}
-                >
-                  delete
-                </button>
+                <div className='author-info'>
+                  <ul key={Object.keys(booksState)[index]}>
+                    <li>{books[0].category}</li>
+                    <li>{books[0].title}</li>
+                  </ul>
+                  <div className='buttons-below'>
+                    <button>Comments</button>
+                    <div class='Line-2'></div>
+                    <button
+                      onClick={(e) => remove(e.target.id)}
+                      id={Object.keys(booksState)[index]}
+                    >
+                      Remove
+                    </button>
+                    <div class='Line-2'></div>
+                    <button>Edit</button>
+                  </div>
+                </div>
+                <div className='oval-container'>
+                  <div class='Oval-2'></div>
+                  <div className='percentage'>
+                    <span class='-Percent-Complete'>100%</span>
+                    <span class='Completed'>Completed</span>
+                  </div>
+                </div>
+                <div className='chapter'>
+                  <span class='Current-Chapter'>Current Chapter</span>
+                  <span class='Current-Lesson'>Chapter 17</span>
+                  <div class='Rectangle-2'>
+                    <span class='Update-progress'>Update progress</span>
+                  </div>
+                </div>
               </div>
             </div>
           );
@@ -79,21 +98,24 @@ const BookList = () => {
             onChange={handleTitleChange}
             required
           />
-          <input
-            type='text'
-            id='category'
-            placeholder='Book title'
-            value={category.inputCategory}
-            onChange={categoryChangeHandler}
+          <select
+            value={form.selectedValue}
+            onChange={handleSelectChange}
+            name='categories'
+            id='categories'
             required
-          />
-          <button type='submit'>add</button>
-          <select name='selectList' id='selectList' defaultValue='Categories'>
-            <option value='option 1'>Category</option>
-            <option value='option 2'>Action</option>
-            <option value='option 2'>Science Fiction</option>
-            <option value='option 2'>Economy</option>
+          >
+            <option value='none' disabled>
+              Category
+            </option>
+            <option value='education'>Fiction</option>
+            <option value='history'>History</option>
+            <option value='entertainment'>Humor and Entertainment</option>
+            <option value='fantasy'>Economy</option>
           </select>
+          <button type='submit' id='add-book'>
+            Add Book
+          </button>
         </form>
       </div>
     </div>
