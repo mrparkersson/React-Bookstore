@@ -10,9 +10,7 @@ export const removeBook = (id) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     }
-  )
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+  );
 
   dispatch(bookActions.removeBookItem(id));
 };

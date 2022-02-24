@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import { v4 as uuidv4 } from 'uuid';
 
 const bookSlice = createSlice({
@@ -17,7 +18,6 @@ const bookSlice = createSlice({
         state.items.push({
           id: uuidv4(),
           title: newBook.title,
-          genre: newBook.genre,
           category: newBook.category,
         });
 

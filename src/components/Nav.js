@@ -9,7 +9,7 @@ const Nav = () => {
       <div className='navigation'>
         <h1>BookStore CMS</h1>
         <ul>
-          <Link to='/books'>
+          <Link to='/'>
             <li>Books</li>
           </Link>
           <Link to='/categories'>
